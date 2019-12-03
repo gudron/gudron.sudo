@@ -1,0 +1,6 @@
+---
+- name: Install sudo package
+  action:
+    module: "{{ paclage_manager_module }}"
+    name: "{{ sudo_package_name }}"
+    state: present

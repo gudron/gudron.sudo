@@ -1,0 +1,19 @@
+{{ ansible_managed | comment }}
+
+Defaults	env_reset
+Defaults	mail_badpass
+Defaults	secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:"
+
+root	ALL=(ALL:ALL) ALL
+
+%sudo	ALL=(ALL:ALL) ALL
+
+{% for group in groups_list_params %}
+%{{ group.name }} ALL=(ALL:ALL) {% if[group['no_pwd_sudo']] %} NOPASSWD: {% endif %}ALL
+{% endfor %}
+
+{% for user in users_list_params %}
+{{ user.name }} ALL=(ALL:ALL) {% if[user['no_pwd_sudo']] %} NOPASSWD: {% endif %}ALL
+{% endfor %}
+
+#includedir /etc/sudoers.d

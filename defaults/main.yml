@@ -1,0 +1,16 @@
+---
+sudoers_params:
+#  path: /usr/etc/sudoers
+
+as_part: 
+
+groups_list_params:
+  - name: wheel
+    no_pwd_sudo: True
+
+  - name: sudo
+    no_pwd_sudo: False
+
+users_list_params:
+  - name: example_user
+    no_pwd_sudo: False

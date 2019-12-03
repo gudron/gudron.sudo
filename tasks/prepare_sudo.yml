@@ -1,0 +1,36 @@
+---
+- name: Stat file sudoers file
+  stat:
+    path: "{{ sudoers_path }}"
+  register: sudoer_st
+
+- name: Prepare sudo main config
+  template:
+    src: templates/etc/sudoers.j2
+    dest: "{{ sudoers_path }}"
+    mode: "u=r,g=r"
+
+# - name: Prepare sudo main config
+#   blockinfile:
+#     content: "{{ lookup('template', 'templates/etc/sudoers_part.j2') }}"
+#     dest: "{{ sudoers_path }}"
+#     state: present
+#     marker: "# ANSIBLE MAGED BLOCK {mark}"
+#     marker_begin: "# BEGIN CONFIG {{ interface_name }}"
+#     marker_end: "# END CONFIG {{ interface_name }}"
+#     backup: yes
+
+- name: Add user to sudo group
+  user:
+    name: "{{ user.name }}"
+    groups: sudo
+    append: yes
+  when: 
+    - user.is_sudo is defined
+    - user.is_sudo
+  loop: "{{ users_list_params }}"
+  loop_control:
+    loop_var: user
+  no_log: yes
+  # notify:
+  #   - os:sudo_user:added
