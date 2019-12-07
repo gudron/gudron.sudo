@@ -1,7 +1,7 @@
 galaxy_info:
-  author: Alex V Kotelnikov 
-  description: Role for install sudo package
-  license: "license (Apache)"
+  author: Alex V Kotelnikov
+  description: Role for install sudo package and manage sudo privelegies
+  license: Apache 2.0
 
   min_ansible_version: 2.4
 
@@ -13,13 +13,13 @@ galaxy_info:
     - name: Debian
       versions:
         - 8.0
-        - 9.0 
+        - 9.0
     - name: OtherLinux
-    
+
   galaxy_tags:
     - sudo
     - linux sudo
-    
+
 allow_duplicates: true
 
 dependencies: []
