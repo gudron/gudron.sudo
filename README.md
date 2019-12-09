@@ -1,12 +1,13 @@
 gudron.sudo
-=========
+===========
 
-Role for install sudo package and manage sudo privelegies
+Ansible role for install sudo package and manage sudo privelegies
 
 Role Variables
 --------------
 
 ### General variables
+
   * `sudoers_params: dict`
     Dict with main parameters of sudoers file. Like `path`, `secure_path` and etc.
     
@@ -28,7 +29,24 @@ Role Variables
     * `no_pwd_sudo: boolean`
       Flag of disabling promt password on using sudo command
 
-    Full example: [defaults/main.yml](defaults/main.yml).
+  Full example: [defaults/main.yml](defaults/main.yml).
+
+Instalation
+-----------
+
+Add **gudron.sudo** role to your *requirements* file.
+
+```yaml
+  - src: git@github.com:gudron/gudron.sudo.git
+    scm: git
+    version: master
+```
+
+Install roles via **ansible-galaxy** tool.
+
+```bash
+ansible-galaxy install -p roles -r requirements.yml
+```
 
 Example Playbook
 ----------------
