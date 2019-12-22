@@ -1,0 +1,6 @@
+---
+sudoers_path: "{{ sudoers_params.path | default('/etc/sudoers') }}"
+
+paclage_manager_module: apk
+
+sudo_package_name: sudo
