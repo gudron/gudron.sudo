@@ -4,6 +4,12 @@
     path: "{{ sudoers_path }}"
   register: sudoer_st
 
+- debug:
+    msg: "{{ ansible_distribution }}"
+
+- debug:
+    msg: "{{ hostvars['monit'] }}"
+
 - name: Prepare sudo main config
   template:
     src: templates/etc/sudoers.j2
@@ -25,12 +31,13 @@
     name: "{{ user.name }}"
     groups: sudo
     append: yes
-  when: 
+  when:
     - user.is_sudo is defined
     - user.is_sudo
+    - "{{ ansible_distribution != 'Alpine' }}"
   loop: "{{ users_list_params }}"
   loop_control:
     loop_var: user
-  no_log: yes
+
   # notify:
   #   - os:sudo_user:added
