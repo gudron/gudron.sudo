@@ -33,6 +33,13 @@
   loop_control:
     loop_var: user
 
+- name: Add groups
+  command: "addgroup -S sudo"
+  when:
+    - user.is_sudo is defined
+    - user.is_sudo
+    - ansible_distribution == 'Alpine'
+
 - name: Add user sudo group
   command: "addgroup {{ user.name }} sudo"
   when:
