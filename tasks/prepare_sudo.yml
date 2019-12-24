@@ -35,6 +35,7 @@
 
 - name: Add groups
   command: "addgroup -S sudo"
+  ignore_errors: true
   when:
     - ansible_distribution == 'Alpine'
 
