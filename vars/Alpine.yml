@@ -1,0 +1,4 @@
+---
+paclage_manager_module: apk
+
+sudo_package_name: sudo

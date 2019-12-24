@@ -15,6 +15,9 @@ galaxy_info:
         - 8.0
         - 9.0
     - name: OtherLinux
+    - name: Alpine
+      versions:
+        - 3.11
 
   galaxy_tags:
     - sudo

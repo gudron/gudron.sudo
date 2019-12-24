@@ -1,0 +1,4 @@
+---
+paclage_manager_module: package
+
+sudo_package_name: sudo
