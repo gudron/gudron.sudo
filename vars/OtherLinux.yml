@@ -1,0 +1,4 @@
+---
+paclage_manager_module: opkg
+
+sudo_package_name: sudo
