@@ -1,13 +1,22 @@
 ---
 - name: Include OS-specific variables.
-  include_vars: "{{ ansible_distribution }}.yml"
+  ansible.builtin.include_vars: "{{ ansible_distribution }}.yml"
   when:
     - ansible_distribution is defined
 
-- name: Inlcude tasks
-  include_tasks: "{{ task_name }}"
+- name: Include install package tasks depending on OS
+  ansible.builtin.include_tasks: "{{ task_name }}"
   loop:
     - install.yml
-    - prepare_sudo.yml
+    - prepare-sudo.yml
   loop_control:
     loop_var: task_name
+
+- name: Include prepare sudo config tasks depending on OS
+  ansible.builtin.include_tasks:
+    file: "{{ item }}"
+  with_first_found:
+    - "prepare-sudo-{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version }}.yml"
+    - "prepare-sudo-{{ ansible_distribution | lower }}-{{ ansible_distribution_version }}.yml"
+    - "prepare-sudo-{{ ansible_distribution | lower }}-{{ ansible_distribution_release }}.yml"
+    - "prepare-sudo-{{ ansible_distribution | lower }}.yml"

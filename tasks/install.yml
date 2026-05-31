@@ -1,7 +1,6 @@
 ---
 - name: Install sudo package
-  action:
-    module: "{{ paclage_manager_module }}"
+  ansible.builtin.package:
     name: "{{ sudo_package_name }}"
     state: present
     update_cache: true
