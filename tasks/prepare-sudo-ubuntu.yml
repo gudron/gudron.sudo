@@ -1,0 +1,12 @@
+---
+- name: Add user to sudo group
+  ansible.builtin.user:
+    name: "{{ user.name }}"
+    groups: sudo
+    append: yes
+  when:
+    - user.is_sudo is defined
+    - user.is_sudo
+  loop: "{{ users_list_params }}"
+  loop_control:
+    loop_var: user

@@ -1,0 +1,13 @@
+---
+- name: Add groups
+  ansible.builtin.command: "addgroup -S sudo"
+  ignore_errors: true
+
+- name: Add user sudo group
+  ansible.builtin.command: "addgroup {{ user.name }} sudo"
+  when:
+    - user.is_sudo is defined
+    - user.is_sudo
+  loop: "{{ users_list_params }}"
+  loop_control:
+    loop_var: user
